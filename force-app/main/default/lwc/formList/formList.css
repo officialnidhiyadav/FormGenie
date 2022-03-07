@@ -1,0 +1,55 @@
+.custom-box {
+
+    /* background-color: #f4f6f9; */
+
+    background-origin: padding-box;
+
+}
+
+.custom-boxx {
+
+    /* background-color: #e5e7eb; */
+
+    background-origin: padding-box;
+
+}
+
+.td{
+
+    border: 1px solid #f50000;
+
+    text-align: left;
+
+    padding: 8px;
+
+}
+
+.th {
+
+    border: 1px solid #ffffff;
+
+    text-align: left;
+
+    padding: 8px;
+
+}
+
+.table th:nth-child(even) {
+
+    background-color: #dddddd;
+
+}
+
+table tr:nth-child(odd) {
+
+    background: rgb(241, 215, 215);
+
+}
+
+.slds-button :active{
+
+    background: green;
+
+    background-color: green;
+
+}

@@ -1,0 +1,168 @@
+<template>
+    <lightning-card>
+        <div class="slds-col">
+            <span>
+                <lightning-button label='Edit' icon-name="utility:edit" onclick={editFormDetail}
+                    class="slds-float_right"></lightning-button>
+            </span>
+        </div>
+        <template iterator:formdata={infoData}>
+            <div key={formdata.value.Id}>
+                <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                    <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                        <p>
+                            <lightning-input label="Title" type="text" value={formdata.value.Title__c} name="titletext"
+                                onchange={valueHandleChange} readonly={readonly} onblur={suffixC}>
+                            </lightning-input>
+                        </p>
+                    </div>
+
+                    <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                        <p>
+                            <lightning-input label="Form Name" type="text" value={formdata.value.Name} name="frmName"
+                                readonly="true" required>
+                            </lightning-input>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-gutters slds-var-p-horizontal_small {className}">
+                    <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                        <div class={className}>
+                            <p>Message Header <br />
+                                <lightning-input-rich-text name="Msg" label="Message Header"
+                                    onchange={valueHandleChange} value={formdata.value.Message_Header__c}
+                                    readonly={readonly}>
+                                </lightning-input-rich-text>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                        <div class={className}>
+                            <p>Footer Message <br />
+                                <lightning-input-rich-text name="FootrMsg" label="Footer Message"
+                                    value={formdata.value.Footer_Message__c} onchange={valueHandleChange}
+                                    readonly={readonly}>
+                                </lightning-input-rich-text>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                    <div class="slds-col slds-size_4-of-20 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                        <p>
+                            <lightning-input label="Date and Time" type="checkbox"
+                                value={formdata.value.Date_and_Time__c} name="DandT" onclick={valueHandleChange}
+                                disabled={disable} checked={formdata.value.Date_and_Time__c}>
+                            </lightning-input>
+                        </p>
+                    </div>
+
+                    <div
+                        class="slds-col slds-col slds-size_4-of-20 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                        <p>
+                            <lightning-input label="Enable Page Number" type="checkbox"
+                                value={formdata.value.Enable_Page_number__c} name="Pgnumber" onclick={valueHandleChange}
+                                disabled={disable} checked={formdata.value.Enable_Page_number__c}>
+                            </lightning-input>
+                        </p>
+                    </div>
+
+                    <div
+                        class="slds-col slds-col slds-size_4-of-20 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                        <p>
+                            <lightning-input label="Active" type="checkbox" value={formdata.value.Active__c}
+                                name="active" onclick={valueHandleChange} disabled={disable}
+                                checked={formdata.value.Active__c}>
+                            </lightning-input>
+                        </p>
+                    </div>
+
+                    <div
+                        class="slds-col slds-col slds-size_4-of-20 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                        <p>
+                            <lightning-input label="Deleted" type="checkbox" value={formdata.value.Deleted__c}
+                                name="deleted" onclick={valueHandleChange} disabled={disable}
+                                checked={formdata.value.Deleted__c}>
+                            </lightning-input>
+                        </p>
+                    </div>
+
+                    <div
+                        class="slds-col slds-col slds-size_4-of-20 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                        <p>
+                            <lightning-input label="Enable PDF" type="checkbox" value={formdata.value.Enable_PDF__c}
+                                name="PDF" onclick={valueHandleChange} disabled={disable}
+                                checked={formdata.value.Enable_PDF__c}>
+                            </lightning-input>
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                    <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                        <p>LOGO</p>
+                        <template if:true={fileUpload}>
+                            <lightning-input type="file" onchange={onFileUpload} name="uploadFile"
+                                accept=".xlsx, .xls, .csv, .png, .doc, .docx, .pdf, .jpg">
+                            </lightning-input>
+                        </template>
+
+                        <template if:true={deleteLogo}>
+                            <lightning-button label="Delete LOGO" variant="destructive" onclick={deleteUploadedFile}>
+                            </lightning-button>
+                        </template>
+
+                        <div class="slds-var-m-around_medium slds-text-color_error">
+                            <p>{fileName}</p>
+                            <template if:true={showLoadingSpinner}>
+                                <lightning-spinner alternative-text="Uploading......" size="medium"></lightning-spinner>
+                            </template>
+                        </div>
+
+                        <div style="width: auto;">
+                            <template if:false={data}>
+                                <i class="slds-text-color_error">No image uploaded!</i>
+                            </template>
+                            <template if:true={data}>
+                                <img src={data} width="150">
+                            </template>
+                        </div>
+                    </div>
+
+                    <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                        <p>
+                            <lightning-input label="Object Type" type="text" value={formdata.value.ObjectType__c}
+                                name="typeOfObj" onchange={valueHandleChange} readonly={readonly}>
+                            </lightning-input>
+                        </p>
+                    </div>
+                </div>
+
+                <!--<br />
+        <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+            <div class="slds-text-align_center slds-var-m-top_medium"
+                style="text-align:center; width:40px; margin:auto;">
+                <lightning-button label="Insert" onclick={handleInsert} disabled={disableInsert} variant="brand"></lightning-button>
+            </div>
+            <div class="slds-text-align_center slds-var-m-top_medium"
+                style="text-align:center; width:40px; margin:auto;">
+                <lightning-button label="Next" onclick={handleNext} variant="brand" disabled={disableNext}></lightning-button>
+            </div>
+        </div>-->
+            </div>
+        </template>
+        <template if:true={saveEdit}>
+            <lightning-layout-item flexibility="auto" padding="horizontal-small">
+                <div class="slds-text-align_center">
+                    <lightning-button label="Save" variant="brand" onclick={saveUpdatedForm}></lightning-button>
+                    <lightning-button class="slds-m-left_large" label="Cancel" variant="Neutral" onclick={goBackCancel}>
+                    </lightning-button>
+                </div>
+            </lightning-layout-item>
+        </template>
+    </lightning-card>
+</template>

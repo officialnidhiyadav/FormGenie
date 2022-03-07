@@ -1,0 +1,52 @@
+<template>
+    <lightning-card>
+        <!-- <lightning-datatable data={data} columns={columns} key-field="id"></lightning-datatable>  
+        <<lightning-layout-item flexibility="auto" padding="horizontal-small">
+            <div class="custom-box slds-box_xx-small slds-text-align_left">
+                <lightning-button label="Add" size="small" variant="brand" onclick={handleClick}></lightning-button>
+            </div>
+        </lightning-layout-item>-->
+        <lightning-layout-item flexibility="auto" padding="horizontal-small">
+            <div class="slds-text-align_center">
+                <lightning-button label="Add" size="small" variant="brand" onclick={handleClick}>></lightning-button>
+                <lightning-button class="slds-m-left_large" label="Step" size="small" variant="brand"
+                    onclick={handleStep}></lightning-button>
+                <lightning-button class="slds-m-left_large" label="Step Transaction" size="small" variant="brand"
+                    onclick={handleStepTransaction}></lightning-button>
+                <lightning-button class="slds-m-left_large" label="Validation" size="small" variant="brand"
+                    onclick={handleValidation}></lightning-button>
+            </div>
+        </lightning-layout-item>
+
+        <!--<div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+            <div class="slds-col slds-size_4-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-button label="Add" size="small" variant="brand" onclick={handleClick}></lightning-button>
+                </p>
+            </div>
+            <div class="slds-col slds-size_4-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-button label="Step" size="small" variant="brand" onclick={handleStep}></lightning-button>
+                </p>
+            </div>
+            <div class="slds-col slds-size_4-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-button label="Step Transaction" size="small" variant="brand"
+                        onclick={handleStepTransaction}></lightning-button>
+                </p>
+            </div>
+        </div>-->
+
+        <template if:true={data}>
+            <div style="height: 300px;">
+                <lightning-datatable key-field="id" data={data} columns={columns} show-row-number-column="true"
+                    onrowaction={callRowAction}>
+                </lightning-datatable>
+            </div>
+        </template>
+
+        <template if:true={error}>
+            {error}>
+        </template>
+    </lightning-card>
+</template>

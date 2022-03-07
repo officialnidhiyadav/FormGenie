@@ -1,0 +1,112 @@
+<template>
+    <lightning-card title="Create Transition Rule">
+        <div class="slds-m-around_medium">
+            <lightning-record-edit-form object-api-name={objectApiName}>
+                <lightning-input-field field-name="Step_Transaction__c" value={stepTransactionId}
+                    onchange={valueHandleChange} name="steptransactionid">
+                </lightning-input-field>
+            </lightning-record-edit-form>
+        </div>
+        <div class="c-container">
+            <lightning-layout>
+
+                <lightning-layout-item padding="around-small">
+                    <div class="header-column">
+                        <p>
+                            <c-custom-lookup-Transition-Rule to-stp={toStepId} onselected={handleSelected}>
+                            </c-custom-lookup-Transition-Rule>
+                        </p>
+                    </div>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-small">
+                    <div class="header-column">
+                        <p>
+                            <lightning-combobox name='selectedOperator' label="Operator" value={operatorSelected}
+                                options={operatorsOptions} onchange={valueHandleChange} data-id="resetDT"
+                                disabled={disableInsert}>
+                            </lightning-combobox>
+                        </p>
+                    </div>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-small">
+                    <div class="header-column">
+                        <p>
+                            <lightning-input label="Value" type="text" value={optionsValue} name="valuename"
+                                onchange={valueHandleChange}>
+                            </lightning-input>
+                        </p>
+                    </div>
+                </lightning-layout-item>
+
+                <lightning-layout-item padding="around-small">
+                    <div class="header-column">
+                        <p>
+                            <lightning-icon icon-name='action:new' onclick={addMore} alternative-text='new' size='large' title='new'>
+                            </lightning-icon>
+                        </p>
+                    </div>
+                </lightning-layout-item>
+
+            </lightning-layout>
+        </div>
+
+        <lightning-layout-item flexibility="auto" padding="horizontal-small">
+            <div class="slds-text-align_center">
+                <lightning-button label="Insert" variant="brand" onclick={InsertTransitionRule}></lightning-button>
+                <lightning-button class="slds-m-left_large" variant="brand" label="Add More" title="Add More"
+                    onclick={addMore} icon-name="utility:add" disabled={disableAddMore}>
+                </lightning-button>
+            </div>
+        </lightning-layout-item>
+    </lightning-card>
+
+    <!--<lightning-card title="Create Transition Rule">
+        <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <c-custom-lookup-Transition-Rule to-stp={toStepId} onselected={handleSelected}>
+                    </c-custom-lookup-Transition-Rule>
+                </p>
+            </div>
+
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-combobox name='selectedOperator' label="Operator" value={operatorSelected}
+                        options={operatorsOptions} onchange={valueHandleChange} data-id="resetDT"
+                        disabled={disableInsert}>
+                    </lightning-combobox>
+                </p>
+            </div>
+        </div>
+
+        <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-input label="Value" type="text" value={optionsValue} name="valuename"
+                        onchange={valueHandleChange}>
+                    </lightning-input>
+                </p>
+            </div>
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-record-edit-form object-api-name={objectApiName}>
+                        <lightning-input-field field-name="Step_Transaction__c" value={stepTransactionId}
+                            onchange={valueHandleChange} name="steptransactionid">
+                        </lightning-input-field>
+                    </lightning-record-edit-form>
+                </p>
+            </div>
+        </div>
+
+        <lightning-layout-item flexibility="auto" padding="horizontal-small">
+            <div class="slds-text-align_center">
+                <lightning-button label="Insert" variant="brand" onclick={InsertTransitionRule}></lightning-button>
+                <lightning-button class="slds-m-left_large" variant="brand" label="Add More" title="Add More"
+                    onclick={addMore} icon-name="utility:add" disabled={disableAddMore}>
+                </lightning-button>
+            </div>
+        </lightning-layout-item>
+    </lightning-card>-->
+</template>

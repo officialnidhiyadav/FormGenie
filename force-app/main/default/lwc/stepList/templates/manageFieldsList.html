@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="Manage Fields">
+        <div class="slds-m-around_medium">
+            <template if:true={manageFieldDetails}>
+                <lightning-datatable key-field="Id" data={manageFieldDetails} columns={columns1}
+                    onrowselection={handleRowSelection}>
+                </lightning-datatable>
+                <!--onrowaction={handleRowAction}-->
+            </template>
+        </div>
+        <!--<lightning-layout-item>
+            <div>
+            <lightning-button class="slds-align_absolute-center" label="Add" variant="brand" onclick={addFields}></lightning-button>
+        </div>
+        </lightning-layout-item> -->
+        <lightning-layout-item flexibility="auto" padding="horizontal-small">
+            <div class="slds-text-align_center">
+                <lightning-button label="Add" variant="brand" onclick={addFields}></lightning-button>
+                <lightning-button class="slds-m-left_large" label={buttonLabel} icon-name="utility:delete"
+                    disabled={isTrue} variant="destructive" onclick={deleteFieldRecord}></lightning-button>
+                <lightning-button class="slds-m-left_large" label="Back" variant="brand" onclick={goBackToStep}>
+                </lightning-button>
+            </div>
+        </lightning-layout-item>
+    </lightning-card>
+</template>

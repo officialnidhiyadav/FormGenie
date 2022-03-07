@@ -1,0 +1,414 @@
+<template>
+    <template if:true={showModal}>
+
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+            aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <!-- modal header start -->
+                <header class="slds-modal__header">
+                    <lightning-button-icon class="slds-modal__close" title="Close" icon-name="utility:close"
+                        icon-class="slds-button_icon-inverse" onclick={handleDialogClose}></lightning-button-icon>
+                    <h2 class="slds-text-heading_medium slds-hyphenate">Create Custom Fields</h2>
+                </header>
+                <!-- modal body start-->
+                <div class="slds-modal__content slds-p-around_medium">
+
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_6-of-12 slds-p-horizontal--medium slds-m-bottom_medium">
+                            <lightning-input label="Display Name" type="text" value={displayName} name="DisplayName"
+                            onchange={valueHandleChange} onblur={suffixC}>
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 slds-p-horizontal--medium slds-m-bottom_medium">
+                            <lightning-input label="Form Detail Name" type="text" value={formDetailName}
+                                name="formDetailname" readonly="true">
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 slds-p-horizontal--medium slds-m-bottom_medium">
+                            <lightning-input name="displayOrderNumber" type="number" label="Display Order number"
+                                value={displayCount} readonly="true">
+                            </lightning-input>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 slds-p-horizontal--medium slds-m-bottom_medium">
+                            <lightning-textarea name="sectionText" label="Section Text" placeholder="type here...">
+                            </lightning-textarea>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 slds-p-horizontal--medium slds-m-bottom_medium">
+                            <lightning-combobox name='datatype' label="Data type" value={dataType}
+                                options={newpicklistValue} onchange={valueHandleChange} data-id="resetDT"
+                                disabled={disableInsert}>
+                            </lightning-combobox>
+                        </div>
+                    </div>
+
+                    <!--Picklist dependent fields-->
+
+                    <template if:true={numberPicklistValue}>
+                            <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input label="Field Name" type="text" value={fieldName}
+                                            name="fieldname" onchange={valueHandleChange} onblur={suffixC}
+                                            data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input label="Field API Name" type="text" value={fieldAPIName}
+                                            name="fieldapiname" readonly="true" data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                            </div>
+                        
+
+                        <!--min/max started-->
+
+                        <template if:true={minMaxValueCurrency}>
+                            <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input name="MinValueCurrency" type="number" label="Min Value"
+                                            formatter="currency" step="0.01" onblur={valueHandleChange}
+                                            value={currencyMinValue} data-id="resetDT">
+                                        </lightning-input>
+
+                                    </p>
+                                </div>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input name="MaxValueCurrency" type="number" label="Max Value"
+                                            formatter="currency" step="0.01" onblur={valueHandleChange}
+                                            value={currencyMaxValue} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template if:true={minMaxValueDate}>
+                            <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input name="minValueDate" type="date" label="Min Value"
+                                        onblur={valueHandleChange} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input name="maxValueDate" type="date" label="Max Value"
+                                        onblur={valueHandleChange} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template if:true={minMaxValueDateTime}>
+                            <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input type="datetime" name="minValueDT" label="Min Value"
+                                        onchange={valueHandleChange} value={minValueDT} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input type="datetime" name="maxValueDT" label="Man Value"
+                                onchange={valueHandleChange} value={maxValue} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                            </div>
+                        </template>
+
+
+                        <template if:true={minMaxValueNumber}>
+                            <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input name="minValueNumber" type="number" label="Min Value"
+                                        onblur={valueHandleChange} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input name="maxValueNumber" type="number" label="Max Value"
+                                        onblur={valueHandleChange} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template if:true={minMaxValuePercent}>
+                            <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input type="number" name="minValuePercent" label="Min Value"
+                                            formatter="percent-fixed" step="0.01" onblur={valueHandleChange}
+                                            data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input type="number" name="maxValuePercent" label="Max Value"
+                                            formatter="percent-fixed" step="0.01" onblur={valueHandleChange}
+                                            data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                            </div>
+                        </template>
+
+                        <template if:true={minMaxValueTime}>
+                            <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input type="time" name="minValueTime" label="Min Value"
+                                        onblur={valueHandleChange} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input type="time" name="maxValueTime" label="Max Value"
+                                        onblur={valueHandleChange} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!--min max above-->
+
+                        <!-- editable/required checkbox/description-->
+            
+                            <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                                <div
+                                    class="slds-col slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input label="Is Editable" type="checkbox" value={isEditable}
+                                            name="iseditale" onclick={valueHandleChange} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                                <div
+                                    class="slds-col slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input label="Is Required" type="checkbox" value={isRequired}
+                                            name="isrequired" onclick={valueHandleChange} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                            </div>
+                        
+                        <!-- Inserting RadioButton in component label="Complexity Type"-->
+                        <template if:true={complexTypeRender}>
+                            <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                        <div class="slds-col slds-size_6-of-12 slds-var-m-around_medium">
+                            <p>Complexity Type</p>
+                            <lightning-radio-group name="Complexity Type"  options={options}
+                                value={value} onblur={handleChange}></lightning-radio-group>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12">
+                           
+                        </div>
+                    </div>
+                    </template>
+                        <!-- Inserted RadioButton in component-->
+
+                        <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                <p>
+                                    <lightning-textarea name="Description" label="Description" value={description}
+                                        placeholder="type here..." onblur={valueHandleChange} data-id="resetDT">
+                                    </lightning-textarea>
+                                </p>
+                            </div>
+
+                            <!--defaultValue-->
+                            <template if:true={itemsInOptionList}>
+                                <template if:false={complexBool}>
+                                    <div
+                                        class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                        <p>
+                                            <lightning-textarea name="optionList" label="OptionList"
+                                                placeholder="type here...">
+                                            </lightning-textarea>
+                                        </p>
+                                    </div>
+                                </template>
+
+                                <template if:true={complexBool}>
+                                    <c-sample_-combobox onselected={handleSelected}></c-sample_-combobox>
+                                </template>
+
+                            </template>
+
+                            <template if:true={defaultValueCurrency}>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input label="Default value" type="number" formatter="currency"
+                                            step="0.01" name="defaultvaluecurrency" onblur={valueHandleChange}>
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                            </template>
+                            <template if:true={defaultValueDate}>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input label="Default value" type="Date" name="defaultvaluedate"
+                                        onblur={valueHandleChange} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                            </template>
+
+                            <template if:true={defaultValueDateTime}>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input type="datetime" label="Default Date/Time" name="dvDateTime"
+                                        onchange={valueHandleChange} value={defaultValue} data-id="resetDT"> </lightning-input>
+                                    </p>
+                                </div>
+                            </template>
+                            <template if:true={defaultValueEmail}>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input type="email" label="Default Email Address"
+                                            name="defaultValueemail" onblur={valueHandleChange} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                            </template>
+                            <template if:true={defaultValueNumber}>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input label="Default value" type="number" name="defaultvaluenumber"
+                                        onblur={valueHandleChange} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                            </template>
+                            <template if:true={defaultValuePercent}>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input type="number" label="Default value" name="defaultvaluepercent"
+                                            formatter="percent-fixed" step="0.01" onblur={valueHandleChange}
+                                            data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                            </template>
+                            <template if:true={defaultValuePhone}>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input type="tel" label="Default value" name="defaultvaluephone"
+                                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                            message-when-pattern-mismatch="Please enter Phone is the specified pattern 123-123-1234"
+                                            onblur={valueHandleChange} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                            </template>
+                            <template if:true={defaultValueText}>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-input label="Default value" type="text" name="DefaultvalueText"
+                                        onblur={valueHandleChange} data-id="resetDT">
+                                        </lightning-input>
+                                    </p>
+                                </div>
+                            </template>
+                            <!--Text-Area && Text-Area (Long)-->
+                            <template if:true={defaultValueTextArea}>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>
+                                        <lightning-textarea name="DefaultvalueTextArea" label="Default Value"
+                                        onblur={valueHandleChange} data-id="resetDT"></lightning-textarea>
+                                    </p>
+                                </div>
+                            </template>
+                            <!--Text-Area && Text-Area (Long) above-->
+                            <template if:true={defaultValueTextAreaRich}>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <p>Default Value<br />
+                                        <lightning-input-rich-text name="DefaultvalueTextAreaRich" label="Default Value"
+                                        onblur={valueHandleChange} data-id="resetDT"> </lightning-input-rich-text>
+                                    </p>
+                                </div>
+                            </template>
+                            <template if:true={maskCharacterTextEncrypted}>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <div>Mask Character</div>
+                                    <lightning-radio-group name="maskCharacterRadio" options={maskRadioOptions}
+                                        type="radio" onblur={valueHandleChange} data-id="resetDT">
+                                    </lightning-radio-group>
+                                </div>
+                            </template>
+                            <template if:true={defaultValueTime}>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <lightning-input type="time" name="DefaultValueTime" label="Default Value"
+                                    onblur={valueHandleChange} data-id="resetDT"></lightning-input>
+                                </div>
+                            </template>
+                            <template if:true={defaultValueURL}>
+                                <div
+                                    class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                                    <lightning-input type="url" name="DefaultValueURL" label="Default Value"
+                                        placeholder="Enter valid URL here..." onblur={valueHandleChange}
+                                        data-id="resetDT"></lightning-input>
+                                </div>
+                            </template>
+                        </div>
+                    </template>
+
+                    <!-- modal footer start disabled={saveDisabled}-->
+                    <footer class="slds-modal__footer">
+                        <lightning-layout-item flexibility="auto" padding="horizontal-small">
+                            <div class="slds-text-align_center">
+                                <lightning-button label="Save" variant="brand" onclick={saveFields}></lightning-button>
+                                <lightning-button class="slds-m-left_large" label="Cancel" variant="brand"
+                                    onclick={handleDialogClose}></lightning-button>
+                            </div>
+                        </lightning-layout-item>
+                    </footer>
+                </div>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open">
+        </div>
+    </template>
+</template>

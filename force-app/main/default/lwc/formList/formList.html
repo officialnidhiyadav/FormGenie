@@ -1,0 +1,59 @@
+<template>
+    <lightning-card>
+        <!--<lightning-datatable data={data} columns={columns} key-field="id"></lightning-datatable>-->
+        <div class="custom-box slds-box_xx-small slds-text-align_center">
+            <lightning-button label="New Form" size="small" variant="brand" onclick={handleClick}></lightning-button>
+        </div>
+        <template if:true={data}>
+            <lightning-datatable key-field="id"
+                                 data={data}  
+                                 columns={columns}  
+                                 show-row-number-column="true"  
+                                 hide-checkbox-column
+                                 onrowaction={handleRowAction} >
+            </lightning-datatable>
+        </template>             
+        <template if:true = {error}>
+            {error}     
+        </template>  
+    </lightning-card>                              
+</template>
+<!-- <div style="padding: 10px"> -->
+    <!-- <div style="padding: 10px"> -->
+        <!-- <table  cellspacing="0" cellpadding="5" style="border-collapse:collapse;" >-->
+            <!-- <thead> -->
+                <!-- <tr> -->
+                    <!-- <th class="slds-text-align_center">Title</th> -->
+                    <!-- <th class="slds-text-align_center">Form Name</th> -->
+                    <!-- <th class="slds-text-align_center">Active</th> -->
+                <!-- </tr> -->
+            
+                <!-- <tr class="slds-line-height_reset">  -->                        
+                    <!-- <td style="font-weight: bold">Form Name</td> -->
+                    <!-- <td style="font-weight: bold">Phone</td> -->
+                <!-- </tr> -->
+            <!-- </thead> -->
+
+            <!-- <tbody> -->
+                <!-- <tr class="slds-hint-parent"> -->
+                    <!-- <th data-label="Title" scope="row">  -->
+                        <!-- <th data-label="Form Name" scope="row"> -->
+                            <!-- <td data-label="Title" scope="row"> -->
+                                <!-- <div class="slds-truncate" title="Title"></div> -->
+                            <!-- </td>  -->
+                          
+                            <!-- <td data-label="Active" scope="row"> -->
+                                <!-- <div class="slds-truncate" title="Active"></div> -->
+                            <!-- </td> -->
+                            <!-- <template for:each={data} for:item="frm"> -->
+                                <!-- <tr key={frm.Id} > -->
+                                    <!-- <td class="slds-text-align_center">{frm.Title__c}</td> -->
+                                    <!-- <td class="slds-text-align_center">{frm.Name}</td> -->
+                                    <!-- <td class="slds-text-align_center">{frm.Active}</td> -->
+                                    <!-- <td class="slds-text-align_right"> -->
+                                        <!--<lightning-button-icon label="Delete" size="medium" variant="outline-brand" onclick={handleContactDelete} value={conItem.Id} icon-name="utility:delete" icon-position="right"></lightning-button-icon>-->
+                                        <!-- <lightning-button  size="medium" variant="outline-brand" onclick={handleRowAction} value={frm.Id} icon-name="utility:edit" icon-position="right"></lightning-button> -->
+                                    <!-- </td> -->
+                                <!-- </tr> -->
+                  
+                            <!-- </template> -->

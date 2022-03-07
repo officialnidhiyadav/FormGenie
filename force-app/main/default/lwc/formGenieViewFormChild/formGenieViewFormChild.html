@@ -1,0 +1,141 @@
+<template>
+  <div style="height:25px; margin:20px; margin-bottom:150px; background-color: lightsteelblue;">
+  <lightning-card style="background-color: rgb(212, 222, 238);">
+      <div class="custom-box slds-box_xx-small slds-p-around_medium slds-text-align_center slds-text-heading_medium fontstyle"  style="background-color: rgb(158, 182, 206);">
+      {header}</div>
+      <div class="custom-box slds-box_xx-small slds-p-around_medium slds-text-align_left slds-text-heading_medium fontstyle" >
+        Title: {title}
+      </div>
+      <template if:true={text}>
+        <template for:each={displaytext} for:item="item" for:index="index">
+          <p key={item.Id}>{item.Display_Name__c}
+          <lightning-input type="Text" data-record-id={item.Id} value={txtval} onchange={onchangeText} onblur={textOnblur}></lightning-input></p>
+      </template>
+      </template>
+          
+      <template if:true={textArea}>
+        <template for:each={displaytextarea} for:item="item" for:index="index">
+          <p key={item.Id}>{item.Display_Name__c}
+          <lightning-input onchange={onchangeTextArea} value={txtareaval} type="Text" onblur={textareaOnblur} data-record-id={item.Id}></lightning-input></p>
+      </template>
+      </template>
+         
+      <template if:true={textArealong}>
+        <template for:each={displaytextlong} for:item="item" for:index="index">
+          <p key={item.Id}>{item.Display_Name__c}
+          <lightning-input onchange={onchangeTextLong} type="Text Area (Long)" value={txtarelongaval} data-record-id={item.Id} ></lightning-input></p>
+      </template>
+      </template>
+           
+      <template if:true={textAreaRich}>
+        <template for:each={displaytextrich} for:item="item" for:index="index">
+          <p key={item.Id}>{item.Display_Name__c}
+            <lightning-input-rich-text onchange={onchangeTextRich} value={txtrichval} onblur={txtrichblur} data-record-id={item.Id}></lightning-input-rich-text></p>
+          </template>
+        </template>
+      <template if:true={checkbox}>
+      <template for:each={displaycheckbox} for:item="item" for:index="index">
+      <p key={item.Id}> {item.Display_Name__c}
+      <lightning-input onchange={onchangeCheckbox} id={Checks} type="checkbox" value={checkval} data-record-id={item.Id}></lightning-input> </p>
+      </template>
+      </template>
+
+      <template if:true={phone}>
+      <template for:each={displayPhone} for:item="item" for:index="index">
+      <p key={item.Id}> {item.Display_Name__c}
+      <lightning-input onchange={onchangePhone}  value={phoneval} onblur={onPhoneBlur} type="Phone" data-record-id={item.Id}></lightning-input> </p>
+      </template>
+      </template>
+
+      <template if:true={Email}>
+      <template for:each={displayEmail} for:item="item" for:index="index">
+      <p key={item.Id}>{item.Display_Name__c}
+      <lightning-input onchange={onchangeEmail} type="Email" value={emailval} onblur={onemailblur} data-record-id={item.Id}></lightning-input></p>
+      </template>
+      </template>
+
+      <template if:true={date}>
+      <template for:each={displaydate} for:item="item" for:index="index">
+      <p key={item.Id}>{item.Display_Name__c}
+      <lightning-input onchange={onchangeDate} type="Date" value={txtdateval} data-record-id={item.Id}></lightning-input></p>
+      </template>
+      </template>
+
+  <template if:true={number}>
+  <template for:each={displaynumber} for:item="item" for:index="index">
+    <p key={item.Id}>{item.Display_Name__c}
+      <lightning-input onchange={onchangeNumber} obblur={numberblur} value={numval} type="Number" data-record-id={item.Id}></lightning-input></p>
+  </template>
+  </template>
+
+  <template if:true={percent}>
+    <template for:each={displayPercent} for:item="item" for:index="index">
+      <p key={item.Id}>{item.Display_Name__c}
+      <lightning-input onchange={onchangePercent} value={perval} type="Percent" data-record-id={item.Id}></lightning-input></p>
+  </template>
+</template>
+
+  <template if:true={textencrpted}>
+    <template for:each={displaytextencrypted} for:item="item" for:index="index">
+      <p key={item.Id}>{item.Display_Name__c}
+      <lightning-input onchange={onchangeTextEncrypt}  type="Text (Encrypted)" onblur={textencryOnblur} value={txteryptval} data-record-id={item.Id} ></lightning-input></p>
+  </template>
+</template>
+
+<template if:true={TimeDate}>
+  <template for:each={displaydatetime}  for:item="item" for:index="index">
+    <p key={item.Id}>{item.Display_Name__c}
+    <lightning-input type="datetime" onchange={onchangeTimeDate} value={datetimeval} data-record-id={item.Id} > </lightning-input></p>
+  </template>
+</template>
+
+<template if:true={time}>
+  <template for:each={displaytime}  for:item="item" for:index="index">
+    <p key={item.Id}>{item.Display_Name__c}
+    <lightning-input type="Time" onchange={onchangeTime} value={timeval} data-record-id={item.Id} > </lightning-input></p>
+  </template>
+</template>
+<template if:true={URL}>
+  <template for:each={displayURL}  for:item="item" for:index="index">
+    <p key={item.Id}>{item.Display_Name__c}
+    <lightning-input type="URL" onchange={onchangeURL} onblur={URLblur} value={URLval} data-record-id={item.Id} > </lightning-input></p>
+  </template>
+</template>
+<template if:true={AutoNumber}>
+  <template for:each={displayAutoNumber}  for:item="item" for:index="index">
+    <p key={item.Id}>{item.Display_Name__c}
+    <lightning-input type="Auto Number" onchange={onchangeAutoNumber} onblur={onAutoNoBlur} value={autoval} data-record-id={item.Id} > </lightning-input></p>
+  </template>
+</template>
+     
+ <!-- <template if:true={Picklist}>
+   <p>{displayPicklist}
+    <lightning-combobox name="progress"  options={picklistOptionValues} onchange={onchangePicklist}></lightning-combobox></p>
+  </template>
+  <template if:true={RadioButton}>
+    <p>{displayRadioButton}
+      <lightning-input onchange={onchangeRadio} type="Radio" ></lightning-input></p>
+  </template>
+
+  picklist 
+  multi picklist 
+  radio
+  checkbox
+     
+  
+     
+  </template>-->
+  <br>
+  <div
+  class="custom-box slds-box_xx-small slds-p-around_medium slds-text-align_center slds-text-heading_medium fontstyle" style="background-color:rgb(158, 182, 206);">
+  {footer}</div>
+  <br>
+  <div class="slds-text-align_center">
+    <lightning-button label="Close" onclick={handleClose} variant="brand" >
+    </lightning-button>
+    <lightning-button label="Save" onclick={handleSave} variant="brand" >
+    </lightning-button>
+  </div>
+  </lightning-card>
+  </div>
+</template>

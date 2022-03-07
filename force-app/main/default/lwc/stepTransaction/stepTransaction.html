@@ -1,0 +1,71 @@
+<template>
+    <lightning-card title="Create Step Trasaction Record">
+        <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-input label="Step Transaction Name" type="text" value={stepTransactionName}
+                        name="steptransactionname" onchange={valueHandleChange} data-id="resetDT">
+                    </lightning-input>
+                </p>
+            </div>
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-record-edit-form object-api-name={objectApiName}>
+                        <lightning-input-field field-name="Form_Name__c" value={formnameStepTransn}
+                            onchange={valueHandleChange} name="stepTransanFN" required>
+                        </lightning-input-field>
+                    </lightning-record-edit-form>
+                </p>
+            </div>
+        </div>
+
+        <div class="slds-var-p-horizontal_small">
+                <c-custom-lookup-step-transaction step-frm-nme={formnameStepTransn} onselected={handleSelected} onnextselected={handleNextSelected}>
+                </c-custom-lookup-step-transaction>
+        </div>
+
+        <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-input label="Step Name" type="text" value={parentStepName} name="stepname"
+                        onchange={valueHandleChange} data-id="resetDT" required>
+                    </lightning-input>
+                </p>
+            </div>
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-input label="Next Step" type="text" value={parentNextStepName} name="nextStep"
+                        onchange={valueHandleChange} data-id="resetDT">
+                    </lightning-input>
+                </p>
+            </div>
+        </div>
+
+        <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-input label="Transition Action Name" type="text" value={transitionActionname}
+                        name="transitionactionname" onchange={valueHandleChange} data-id="resetDT" required>
+                    </lightning-input>
+                </p>
+            </div>
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-input label="Form Flow Condition" type="text" value={formFlowCondition}
+                        name="formflowcondition" onchange={valueHandleChange} data-id="resetDT">
+                    </lightning-input>
+                </p>
+            </div>
+        </div>
+
+        <br />
+        <lightning-layout-item flexibility="auto" padding="horizontal-small">
+            <div class="slds-text-align_center">
+                <lightning-button label="Insert" onclick={handleInsert} variant="brand"></lightning-button>
+                <lightning-button class="slds-m-left_large" label="Add Condition" variant="brand" onclick={addCondition}>
+                </lightning-button>
+            </div>
+        </lightning-layout-item>
+    </lightning-card>
+
+</template>

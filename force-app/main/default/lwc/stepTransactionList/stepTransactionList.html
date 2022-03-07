@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title="Step Transaction List" icon-name="custom:custom63">
+        <div class="slds-var-p-horizontal_small slds-var-m-bottom_medium">
+            <p>
+                <lightning-button label="Add Step Transaction" size="small" variant="brand" onclick={handleAdd}></lightning-button>
+            </p>
+        </div>
+        <div class="slds-m-around_medium">
+            <template if:true={stepTransactionData}>
+            <lightning-datatable key-field="Id" data={stepTransactionData} columns={columns} onsave={handleSave}
+                draft-values={draftValues} onrowaction={handleRowAction} onrowselection={handleManageSelection}>
+            </lightning-datatable>
+            </template>
+        </div>
+    </lightning-card>
+</template>

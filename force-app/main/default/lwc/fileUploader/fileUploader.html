@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="File Upload for Logo in Form" icon-name="custom:custom14">
+        <div class="slds-var-m-around_medium">
+            <lightning-input type="file" accept=".xlsx, .xls, .csv, .png, .doc, .docx, .pdf, .jpg" label="LOGO"
+                onchange={openFileUpload}></lightning-input>
+        </div>
+        <template if:true={fileData}>
+            <div class="slds-var-m-around_medium">
+                <p>{fileData.filename}</p>
+            </div>
+        </template>
+        <br />
+        <!--<div class="slds-text-align_left slds-var-m-top_medium" style="text-align:left; width:40px; margin:auto;">
+            <lightning-button label="Submit" onclick={handleclick} variant="brand"></lightning-button>
+        </div>-->
+
+        <lightning-layout-item flexibility="auto" padding="horizontal-small">
+            <div class="slds-text-align_center">
+                <lightning-button label="Submit" variant="brand" onclick={handleclick}></lightning-button>
+                <lightning-button class="slds-m-left_large" label="Next" variant="brand" 
+                onclick={handleNext}>
+                </lightning-button>
+            </div>
+        </lightning-layout-item>
+    </lightning-card>
+</template>

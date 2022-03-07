@@ -1,0 +1,90 @@
+<template>
+    <!--customLookupStep-->
+    <div class="slds-grid slds-gutters slds-p-horizontal_small">
+        <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+        <div class="row">
+            <div class="slds-form-element">
+                <div class="slds-form-element__control">
+                    <div class="slds-combobox_container">
+                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click"
+                            aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                role="none">
+                                
+                                <lightning-input type="text" id="combobox-id-16" value={stepName}
+                                    onchange={handleKeyChange} onkeydown={handleClick} onclick={handleClick}
+                                    onblur={handleClick} aria-activedescendant="option1" label="Step"
+                                    aria-autocomplete="list" aria-controls="listbox-id-12" role="textbox"
+                                    placeholder="Search..."></lightning-input>
+                            </div>
+                            <!-- Start : Parent Search Result -->
+                            <div if:true={messageResult}>
+                                No Result Found!
+                            </div>
+
+                            
+                            <template if:true={showSearchedValues}>
+                                <div class="slds-box" style="height: 130px; overflow-y: scroll;">
+                                    <ul class="" role="">
+                                        <template for:each={stepFieldsList} for:item="stepObj">
+                                            <li class="slds-p-around_x-small" style="cursor: pointer;" key={stepObj.Id}
+                                                onclick={handleParentSelection} data-value={stepObj.Id}
+                                                data-label={stepObj.Name} data-title={stepObj.Step_Title__c}>
+                                                {stepObj.Name}
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </template>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--customLookupNextStep-->
+    <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+        <div class="row">
+            <div class="slds-form-element">
+                <div class="slds-form-element__control">
+                    <div class="slds-combobox_container">
+                        <div class="slds-combobox slds-dropdown-trigger slds-dropdown-trigger_click"
+                            aria-expanded="false" aria-haspopup="listbox" role="combobox">
+                            <div class="slds-combobox__form-element slds-input-has-icon slds-input-has-icon_right"
+                                role="none">
+                                <lightning-input type="text" id="combobox-id-17" value={nextStepName}
+                                    onchange={handleNextKeyChange} onkeydown={handleNextClick} onclick={handleNextClick}
+                                    onblur={handleNextClick} aria-activedescendant="option1" label='Next Step'
+                                    aria-autocomplete="list" aria-controls="listbox-id-12" role="textbox"
+                                    placeholder="Search..."></lightning-input>
+                            </div>
+                            <!-- Start : Parent Search Result -->
+                            <div if:true={nextMessageResult}>
+                                No Result Found!
+                            </div>
+                            <template if:true={showNextSearchedValues}>
+                                <div class="slds-box" style="height: 130px; overflow-y: scroll;">
+                                    <ul class="" role="">
+                                        <template iterator:stepobj={displayNextStepFiledsList}>
+                                            <li key={stepobj.value.Id} class="slds-p-around_x-small" style="cursor: pointer;" 
+                                                onclick={handleNextParentSelection} data-value={stepobj.value.Id}
+                                                data-label={stepobj.value.Name} data-title={stepobj.value.Step_Title__c}>
+                                                {stepobj.value.Name}
+                                            </li>
+                                        </template>
+                                    </ul>
+                                </div>
+                            </template>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+</div>
+</div>
+
+</template>

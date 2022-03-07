@@ -1,0 +1,88 @@
+<template>
+    <lightning-card title="Validation Rule Form ">
+        <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>                  
+                    <lightning-record-edit-form object-api-name={objectApiName}>
+                        <lightning-input-field field-name="Form_Name__c" onchange={valueHandleChange} 
+                        name="formDetailFN" value={formnamevalidation}>
+                        </lightning-input-field>
+                    </lightning-record-edit-form>
+                </p>
+            </div>
+        
+              <!--CustomeValidation LookUp start value={formnamefrmdetail}-->
+                 <!--<div class="header-column">
+                     <p>
+                          </p>
+                 </div>-->
+              <!--CustomeValidation LookUp end-->
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                   <!-- <lightning-input label="Field Detail Id" type="text" value={fieldDetailId} name="fielddetailid"
+                        onchange={valueHandleChange}>
+                    </lightning-input>-->
+
+                   <!-- <lightning-record-edit-form object-api-name={objectApiName}>
+                        <lightning-input-field field-name="Field_Detail_Id__c"
+                            onchange={valueHandleChange} name="fieldDetailId">
+                        </lightning-input-field>
+                    </lightning-record-edit-form>-->
+                    <c-custom-lookup-validation-rule valid-frm-nme={formnamevalidation} onselected={handleSelected}>
+                    </c-custom-lookup-validation-rule>
+
+                </p>
+            </div>
+        </div>
+
+        <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-input label="Validation Rules Name" type="text" value={Validvalue}
+                        name="validationrulesname" onchange={valueHandleChange}>
+                    </lightning-input>
+                    <lightning-input label="Age" type="number" value={ageVal}
+                    name="ageVal"  onchange={handleAgeOnChange}>
+                </lightning-input>
+                    <lightning-input label="Conditional field" type="text" value={logicalOpTest}
+                    >
+                </lightning-input>
+                </p>
+            </div>
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-combobox name='logicalop' label="Logical Op" value={logicalOp} placeholder="-Select-"
+                        options={pickListValues} onchange={handleLogicalOpChange}>
+                    </lightning-combobox>
+                </p>
+            </div>
+        </div>
+
+        <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-textarea name="validvalue" label="Value" value={validationValue} placeholder="type here..." onchange = {valueHandleChange}>
+                    </lightning-textarea>
+                </p>
+            </div>
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-textarea name="errorText" label="Error Text" value={validationErrorText} placeholder="type here..." onchange={valueHandleChange}>
+                    </lightning-textarea>
+                </p>
+            </div>
+        </div>
+
+       <!-- <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+        <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small">
+            <c-custom-lookup-validation-rule step-frm-nme={formnameStepTransn} onselected={handleSelected} onnextselected={handleNextSelected}>
+            </c-custom-lookup-validation-rule>
+    </div>
+</div> -->
+        <br />
+        <div class="slds-text-align_center slds-var-m-top_medium" style="text-align:center; width:40px; margin:auto;">
+            <lightning-button label="Insert" onclick={handleSave} variant="brand"></lightning-button>
+        </div>
+    </lightning-card>
+
+</template>

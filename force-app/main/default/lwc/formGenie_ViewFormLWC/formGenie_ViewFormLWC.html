@@ -1,0 +1,79 @@
+<template>
+    <lightning-card>
+        <div style="text-align: center;	font-size: large;	
+        font-family: sans-serif;background-color: rgb(0, 54, 98);color: white;">
+        Form Details
+        </div>
+        <div style="color:rgb(73, 128, 180);padding-top:10px;">
+            <i><b>Note:</b> only Active Form Details are available</i>
+        </div>
+   
+    <table class="slds-table slds-table--bordered slds-table--cell-buffer slds-table_col-bordered quote-Edit-table" id='tableId'>
+       <thead>
+            <tr class="slds-text-title_caps">
+                <th style="width: 9%;" scope="col">
+                    <b>
+                        <div class="slds-truncate slds-align_absolute-center" title="Category">Form Name
+                            <lightning-helptext content="Form Name"></lightning-helptext>
+                        </div>
+                    </b>
+                </th>
+                <th style="width: 8%;" scope="col">
+                    <b>
+                        <div class="slds-truncate slds-align_absolute-center" title="Project">Title
+                            <lightning-helptext
+                                content="Form Title">
+                            </lightning-helptext>
+                        </div>
+                    </b>
+                </th>
+                <th style="width: 8%;" scope="col">
+                    <b>
+                        <div class="slds-truncate slds-align_absolute-center" title="Service">Status
+                            <lightning-helptext
+                                content="Form With Active Status">
+                            </lightning-helptext>
+                        </div>
+                    </b>
+                </th>
+                <th style="width: 10%;" scope="col">
+                    <b>
+                        <div class="slds-truncate slds-align_absolute-center" title="Actions">View Form</div>
+                    </b>
+                </th>
+           </tr>
+        </thead>
+        <tbody>
+            <template for:each={formlist} for:item="item" for:index="indexVar">
+                <tr key={item.Id} class="slds-hint-parent">
+                    <td class="slds-size_1-of-6">
+                        <div>
+                            {item.Name}
+                        </div>
+                    </td>
+                    <td class="slds-size_1-of-6">
+                        <div>
+                            {item.Title__c}
+                        </div>
+                    </td>
+                    <td class="slds-size_1-of-6">
+                        <div>
+                            {item.Active__c}
+                        </div>
+                    </td>
+                    <td class="slds-size_1-of-6">
+                        <div class="slds-form-element buttons slds-text-align_center">
+                            <lightning-button data-id={item.Id} label="View Form" variant="brand"  onclick={viewFormDetails}>
+                               
+                            </lightning-button>
+                        </div>
+                    </td>
+                </tr>
+            </template>
+        </tbody>
+    </table> 
+    </lightning-card>
+     <template if:true={Viewdetails}>
+        <c-form-genie-view-form-child onclosepage={Viewdetails} selectedformid={selectedrecordid}></c-form-genie-view-form-child>
+     </template>
+</template>

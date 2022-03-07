@@ -1,0 +1,28 @@
+<template>
+    <lightning-card title="Details Of Form">
+        <lightning-tabset variant="scoped">
+            <lightning-tab label="Form Details" onactive={handleActive}>
+                <div class="tabContent">
+                    <c-form-information form-info-id={formId}></c-form-information>
+                </div>
+            </lightning-tab>
+            <lightning-tab label="Form Fields" onactive={handleActive}>
+                <template if:true={formFields}>
+                    <div class="tabContent">
+                        <c-form-detail-list formnamefrmdetail-list={formId}></c-form-detail-list>
+                    </div>
+                </template>
+            </lightning-tab>
+            <lightning-tab label="Form Steps" onactive={handleActive}>
+                <div class="tabContent">
+                    <c-step-list formnamesteplist={formId} public-call-wire-step-list={publicCallWire}></c-step-list>
+                </div>
+            </lightning-tab>
+            <lightning-tab label="Step Transition" onactive={handleActive}>
+                <div class="tabContent">
+                    <c-step-transaction-list form-name-step-transn-list={formId}></c-step-transaction-list>
+                </div>
+            </lightning-tab>
+        </lightning-tabset>
+    </lightning-card>
+</template>

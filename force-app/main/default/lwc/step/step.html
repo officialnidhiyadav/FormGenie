@@ -1,0 +1,84 @@
+<template>
+    <lightning-card>
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-card title="Create Step Record">
+
+                    <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                        <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                            <p>
+                                <lightning-input label="Step Title" type="text" name="steptitle" value={stepTitle}
+                                    onchange={valueHandleChange} data-id="resetDT">
+                                </lightning-input>
+                            </p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                            <p>
+                                <lightning-input label="Step Name" type="text" value={stepName} name="stepname"
+                                    readonly="true">
+                                </lightning-input>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                        <!--<div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-input label="Form Name" type="text" value={formName} name="formname"
+                        onchange={valueHandleChange}>
+                    </lightning-input>
+                </p>
+            </div>-->
+                        <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                            <p>
+                                <lightning-record-edit-form object-api-name={objectApiName}>
+                                    <lightning-input-field field-name="Form_Name__c" value={formnamefrmdetailStep}
+                                        onchange={valueHandleChange} name="formDetailFN">
+                                    </lightning-input-field>
+                                </lightning-record-edit-form>
+                            </p>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                            <p>
+                                <lightning-input label="Transition Action Name" type="text" value={transitionActionName}
+                                    name="transitionactionname" onchange={valueHandleChange}>
+                                </lightning-input>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                    <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                        <p>
+                            <lightning-input label="Enable Progressbar" type="checkbox" value={enableProgressbar} name="progressbar"
+                                onclick={valueHandleChange} data-id="resetDT"></lightning-input>
+                        </p>
+                    </div>
+                    <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                        <p>
+                            <lightning-input label="Is First Step" type="checkbox" value={isFirstStep} name="isfirststep"
+                                onclick={valueHandleChange} data-id="resetDT">
+                            </lightning-input>
+                        </p>
+                    </div>
+                    </div>
+                    <br />
+                    <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+                        <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                            <lightning-button label="Insert" onclick={handleInsert} variant="brand"></lightning-button>
+                        </div>
+                        <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                            <lightning-button variant="brand" label="Add More" title="Add More" onclick={addMore}
+                                icon-name="utility:add" disabled={disableAddMore}>
+                            </lightning-button>
+                        </div>
+                    </div>
+                </lightning-card>
+            </div>
+            <div class="slds-col slds-size_1-of-2">
+                <lightning-card>
+                    <c-step-List formnamesteplist={formnamefrmdetailStep} frm-detail-id-list={frmdetailidlist}></c-step-List>
+                </lightning-card>
+            </div>
+        </div>
+    </lightning-card>
+</template>

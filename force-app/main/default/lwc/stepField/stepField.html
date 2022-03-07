@@ -1,0 +1,31 @@
+<template>
+    <lightning-card title="Create Form Record">
+        <div class="slds-grid slds-gutters slds-var-p-horizontal_small">
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-input label="Form Detail Name" type="text" value={formDetailName} name="formdetailname"
+                        onchange={valueHandleChange}>
+                    </lightning-input>
+                </p>
+            </div>
+            <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+                <p>
+                    <lightning-input label="Step" type="text" value={Step} name="step"
+                        onchange={valueHandleChange}>
+                    </lightning-input>
+                </p>
+            </div>
+        </div>
+        <div class="slds-col slds-size_6-of-12 slds-var-p-horizontal_small slds-var-m-bottom_medium">
+            <p>
+                <lightning-input label="Step Field Name" type="text" value={stepFieldName} name="stepfieldname"
+                    onchange={valueHandleChange}>
+                </lightning-input>
+            </p>
+        </div>
+        <br />
+        <div class="slds-text-align_center slds-var-m-top_medium" style="text-align:center; width:40px; margin:auto;">
+            <lightning-button label="Insert" onclick={handleSave} variant="brand"></lightning-button>
+        </div>
+    </lightning-card>    
+</template>

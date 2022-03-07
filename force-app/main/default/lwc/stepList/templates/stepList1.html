@@ -1,0 +1,26 @@
+<template>
+    <lightning-card title="Step List" icon-name="custom:custom63">
+        <!--<div class="slds-text-align_center slds-var-m-top_medium"
+                style="text-align:center; width:40px; margin:auto;">
+                <lightning-button-icon variant="brand" icon-name="utility:refresh" alternative-text="Refresh"
+                    title="refresh" onclick={refresStepList}></lightning-button-icon>
+            </div>-->
+        <div class="slds-m-around_medium">
+            <!--<template if:true={stepDetails}>-->
+            <lightning-datatable key-field="Id" data={frmDetailIdList} columns={columns} onsave={handleSave}
+                draft-values={draftValues} onrowaction={handleRowAction} onrowselection={handleManageSelection}>
+            </lightning-datatable>
+            <!--</template>-->
+      
+        
+
+       <lightning-layout-item flexibility="auto" padding="horizontal-small">
+            <div class="slds-text-align_center">
+                <lightning-button label="Manage Fields" variant="brand" onclick={singleManageFields}>
+                </lightning-button>
+                <lightning-button class="slds-m-left_large" label="Next" variant="brand" onclick={stepTransactionListEvent}></lightning-button>
+            </div>
+        </lightning-layout-item>
+    </div>
+    </lightning-card>
+</template>

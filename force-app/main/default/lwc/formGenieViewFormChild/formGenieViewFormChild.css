@@ -1,0 +1,5 @@
+.logo p {
+    /* other styles goes here... */
+    display: inline-block;
+    vertical-align: top;
+}

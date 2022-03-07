@@ -1,0 +1,48 @@
+<template>
+  <lightning-card title="Reorder Fields">
+    <div class="slds-grid slds-grid_vertical">
+      <div class="slds-scrollable slds-grow">
+        <div class="slds-scrollable_none">
+          <table aria-multiselectable="true" class="
+              css-serial
+              slds-table slds-no-row-hover
+              slds-table_bordered
+              slds-table_fixed-layout
+              slds-table_resizable-cols
+            " role="grid">
+            <thead>
+              <tr class="slds-line-height_reset">
+                <th>S. No.</th>
+                <th>Field Name</th>
+                <th>Data Type</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template for:each={ElementList} for:item="reordField" for:index="index">
+                <tr key={reordField.Id} onchange={Change} draggable="true" ondrop={Drop} ondragstart={DragStart}
+                  ondragover={DragOver} title={index}>
+                  <!-- data-record-id={index} onchange={onChangeNum}-->
+                  <td role="gridcell" class="slds-cell-wrap" title={index}>
+                  </td>
+                  <td role="gridcell">
+                    <div class="slds-cell-wrap" title={index}>{reordField.Field_name__c}</div>
+                  </td>
+                  <td role="gridcell">
+                    <div class="slds-cell-wrap" title={index}>{reordField.Data_Type__c}</div>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <lightning-layout-item flexibility="auto" padding="horizontal-small">
+      <div class="slds-text-align_center">
+        <lightning-button label="Update" variant="brand" onclick={fieldOrderupdate}></lightning-button>
+        <lightning-button class="slds-m-left_large" label="Back" variant="brand" onclick={goBackToStep}>
+        </lightning-button>
+      </div>
+    </lightning-layout-item>
+  </lightning-card>
+</template>
